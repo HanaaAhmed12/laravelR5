@@ -3,14 +3,47 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\StudentController;
+use App\Models\Student;
 
+
+
+Route::get('students', [StudentController::class, 'create']);
+Route::post('addStudents', [StudentController::class, 'store'])->name('storeStudent');
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('insertClient',[ClientController::class, 'store']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 1 *****************************************************************************************************************
 Route::post('submit1', [FormController::class, 'form'])->name('submitForm');
-
 Route::get('test30',[MyController::class, 'my_data']);
-
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,7 +56,7 @@ Route::get('/', function () {
 //     return 'Welcome to my website ' . $id;
 // })->whereNumber('id');
 
-Route::get('job/{name?}', function ($name) {
+Route::get('job/{name?}', function ($name =0) {
     return 'My job is ' . $name . '.';
 })->whereAlpha('name');
 
@@ -56,3 +89,5 @@ Route::get('form', function(){
 Route::post('reform', function(){
     return 'Data received';
 })->name('reform1');
+
+// ****************************************************************************************************************
