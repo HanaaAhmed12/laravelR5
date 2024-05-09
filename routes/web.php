@@ -9,21 +9,18 @@ use App\Models\Student;
 
 
 
-Route::get('students', [StudentController::class, 'create']);
-Route::post('addStudents', [StudentController::class, 'store'])->name('storeStudent');
 
 
 
+Route::get('clients', [ClientController::class, 'index'])->name('clients');;
+Route::get('addClients', [ClientController::class, 'create'])->name('addClient');
+Route::post('insertClient',[ClientController::class, 'store'])->name('insertClient');;
 
 
 
-
-
-
-
-
-
-Route::get('insertClient',[ClientController::class, 'store']);
+ Route::get('students', [StudentController::class, 'index'])->name('students');
+ Route::get('addStudents', [StudentController::class, 'create'])->name('addStudent');
+ Route::post('insertStudent',[StudentController::class, 'store'])->name('insertStudent');
 
 
 
@@ -37,17 +34,21 @@ Route::get('insertClient',[ClientController::class, 'store']);
 
 
 
+
+// 2 *********************************************************************************
+// Route::get('students', [StudentController::class, 'create']);
+// Route::post('addStudents', [StudentController::class, 'store'])->name('storeStudent');
+// Route::get('insertClient',[ClientController::class, 'store']);
+// 2 **********************************************************************************
 
 
 
 
 // 1 *****************************************************************************************************************
-Route::post('submit1', [FormController::class, 'form'])->name('submitForm');
-Route::get('test30',[MyController::class, 'my_data']);
+
 Route::get('/', function () {
     return view('welcome');
 });
-
 // Route::get('Hanaa/{id?}', function ($id = 0) {
 //     return 'Welcome to my website ' . $id;
 // })->where(['id' => '[0-9]+']);
@@ -56,11 +57,11 @@ Route::get('/', function () {
 //     return 'Welcome to my website ' . $id;
 // })->whereNumber('id');
 
-Route::get('job/{name?}', function ($name =0) {
+Route::get('job/{name?}', function ($name) {
     return 'My job is ' . $name . '.';
 })->whereAlpha('name');
 
-Route::get('Hanaa/{name?}', function ($name) {
+Route::get('Hanaa/{name?}', function ($name = "") {
     return 'My name is: ' . $name;
 })->whereIn('name' , ['Hany' , 'Ahmed' , 'Samia']);
 
@@ -73,6 +74,19 @@ Route::prefix('cars')->group(function () {
         return 'Category is Hummer ';
     });
 });
+
+Route::prefix("colors")->group(function (){
+    Route::get('red' , function(){
+        return "Color Is Red";
+    });
+    Route::get('blue' , function(){
+        return "Color Is Blue";
+    });
+});
+
+
+
+
 // Route::fallback(function(){
 //     return redirect('/');
 // });
@@ -89,5 +103,6 @@ Route::get('form', function(){
 Route::post('reform', function(){
     return 'Data received';
 })->name('reform1');
-
-// ****************************************************************************************************************
+Route::post('submit1', [FormController::class, 'form'])->name('submitForm');
+Route::get('test30',[MyController::class, 'my_data']);
+// 1 ****************************************************************************************************************
