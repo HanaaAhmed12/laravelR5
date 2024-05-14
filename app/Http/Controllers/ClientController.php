@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Client;
 
@@ -14,8 +14,11 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::get();
-       return view('clients' , compact('clients'));
+    //     $clients = Client::get();
+    //    return view('clients' , compact('clients'));
+
+    $clients = DB::table('clients')->get();
+    return view('clients', compact('clients'));
     }
 
     /**
@@ -39,9 +42,12 @@ class ClientController extends Controller
     //   $client->save();
     //   return "Inserted Successfully";
 
-         Client::create($request->only($this->columns));
-         return redirect('clients');
+        //  Client::create($request->only($this->columns));
+        //  return redirect('clients');
 
+
+        DB::table('clients')->insert($request->only($this->columns));
+        return redirect('clients');
     }
 
     /**
@@ -49,7 +55,11 @@ class ClientController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // $client=Client::findOrFail($id);
+        // return view('showClient', compact('client'));
+
+        $client = DB::table('clients')->where('id', $id)->first();
+        return view('showClient', compact('client'));
     }
 
     /**
@@ -57,7 +67,11 @@ class ClientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // $client=Client::findOrFail($id);
+        // return view('editClient', compact('client'));
+
+        $client = DB::table('clients')->where('id', $id)->first();
+        return view('editClient', compact('client'));
     }
 
     /**
@@ -65,14 +79,24 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Client::where('id' , $id)->update($request->only($this->columns));
+        // return redirect('clients');
+
+        DB::table('clients')->where('id', $id)->update($request->only($this->columns));
+         return redirect('clients');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        // $id = $request -> id;
+        // Client::where('id' , $id)->delete();
+        // return redirect('clients');
+
+        $id = $request->id;
+        DB::table('clients')->where('id', $id)->delete();
+        return redirect('clients');
     }
 }

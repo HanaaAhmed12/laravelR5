@@ -7,33 +7,28 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StudentController;
 use App\Models\Student;
 
+Route::get('students', [StudentController::class, 'index'])->name('students');
+Route::get('addStudents', [StudentController::class, 'create'])->name('addStudent');
+Route::post('insertStudent',[StudentController::class, 'store'])->name('insertStudent');
+Route::get('editStudents/{id}',[StudentController::class, 'edit'])->name('editStudents');
+Route::put('updateStudents/{id}',[StudentController::class, 'update'])->name('updateStudents');
+Route::get('showStudents/{id}',[StudentController::class, 'show'])->name('showStudents');
+Route::delete('delStudents',[StudentController::class, 'destroy'])->name('delStudents');
 
 
 
-
-
-Route::get('clients', [ClientController::class, 'index'])->name('clients');;
+// 5 *******************************************************************************************
+Route::get('clients', [ClientController::class, 'index'])->name('clients');
 Route::get('addClients', [ClientController::class, 'create'])->name('addClient');
-Route::post('insertClient',[ClientController::class, 'store'])->name('insertClient');;
-
-
-
- Route::get('students', [StudentController::class, 'index'])->name('students');
- Route::get('addStudents', [StudentController::class, 'create'])->name('addStudent');
- Route::post('insertStudent',[StudentController::class, 'store'])->name('insertStudent');
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::post('insertClient',[ClientController::class, 'store'])->name('insertClient');
+Route::get('editClients/{id}',[ClientController::class, 'edit'])->name('editClients');
+Route::put('updateClients/{id}',[ClientController::class, 'update'])->name('updateClients');
+Route::get('showClients/{id}',[ClientController::class, 'show'])->name('showClients');
+Route::delete('delClients',[ClientController::class, 'destroy'])->name('delClients');
+// 4 *******************************************************************************************
+// Route::get('clients', [ClientController::class, 'index'])->name('clients');;
+// Route::get('addClients', [ClientController::class, 'create'])->name('addClient');
+// Route::post('insertClient',[ClientController::class, 'store'])->name('insertClient');;
 
 // 2 *********************************************************************************
 // Route::get('students', [StudentController::class, 'create']);
@@ -41,11 +36,7 @@ Route::post('insertClient',[ClientController::class, 'store'])->name('insertClie
 // Route::get('insertClient',[ClientController::class, 'store']);
 // 2 **********************************************************************************
 
-
-
-
 // 1 *****************************************************************************************************************
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -64,8 +55,6 @@ Route::get('job/{name?}', function ($name) {
 Route::get('Hanaa/{name?}', function ($name = "") {
     return 'My name is: ' . $name;
 })->whereIn('name' , ['Hany' , 'Ahmed' , 'Samia']);
-
-
 Route::prefix('cars')->group(function () {
     Route::get('Toyota', function() {
         return 'Category is Toyota ';
@@ -74,7 +63,6 @@ Route::prefix('cars')->group(function () {
         return 'Category is Hummer ';
     });
 });
-
 Route::prefix("colors")->group(function (){
     Route::get('red' , function(){
         return "Color Is Red";
@@ -83,10 +71,6 @@ Route::prefix("colors")->group(function (){
         return "Color Is Blue";
     });
 });
-
-
-
-
 // Route::fallback(function(){
 //     return redirect('/');
 // });
@@ -94,7 +78,6 @@ Route::prefix("colors")->group(function (){
 // Route::get('test10', function(){
 //     return view('test');
 // });
-
 Route::get('form', function(){
     return view('form1');
 });

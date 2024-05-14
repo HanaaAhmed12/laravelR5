@@ -63,17 +63,18 @@
     <div class="main-block">
       <div class="left-part">
         <i class="fas fa-graduation-cap"></i>
-        <h1 style="text-align: center">Register to our school</h1>
-        <form action="{{ route('insertStudent') }}" method="POST">
+        <h1 style="text-align: center">Edit Student</h1>
+        <form action="{{ route('updateStudents' , $student->id) }}" method="POST">
           @csrf
+          @method('put')
           <label for="StudentName">Student Name:</label><br />
-          <input type="text" id="StudentName" name="StudentName" value="" /><br />
+          <input type="text" id="StudentName" name="StudentName" value="{{ $student->StudentName }}" /><br />
           <label for="age">Age:</label><br />
-          <input type="text" id="age" name="age" value="" /><br /><br />
+          <input type="text" id="age" name="age" value="{{ $student->age }}" /><br /><br />
           <label for="phone">Phone Number:</label><br />
-          <input type="text" id="phone" name="phone" value="" /><br /><br />
+          <input type="text" id="phone" name="phone" value="{{ $student->phone }}" /><br /><br />
           <label for="email">Email:</label><br />
-          <input type="text" id="email" name="email" value="" /><br /><br />
+          <input type="text" id="email" name="email" value="{{ $student->email }}" /><br /><br />
           <input type="submit" value="Submit" />
         </form>
       </div>

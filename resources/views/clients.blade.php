@@ -22,6 +22,9 @@
         <th>Phone</th>
         <th>Email</th>
         <th>Website</th>
+        <th>Edit</th>
+        <th>Show</th>
+        <th>Delete</th>
       </tr>
     </thead>
 
@@ -32,10 +35,30 @@
         <td>{{ $client->phone }}</td>
         <td>{{ $client->email }}</td>
         <td>{{ $client->website }}</td>
+        <td><a href="{{ route('editClients' , $client->id)  }}">Edit</a></td>
+        <td><a href="{{ route('showClients' , $client->id)  }}">Show</a></td>
+        <td>
+            <form action="{{ route('delClients') }}" method="post">
+            @csrf
+            @method('Delete')
+            <input type="hidden" name="id" value="{{ $client->id }}">
+            <input type="submit" value="Delete"  onclick="return confirm('Are you sure you want to Delete this user?')">
+            </form>
+        </td>
       </tr>
       @endforeach
     </tbody>
   </table>
 </div>
+
+<script>
+    function confirmDelete(clientId) {
+        if (confirm('Are you sure you want to delete this client?')) {
+            document.getElementById('deleteClientForm' + clientId).submit();
+            return true;
+        }
+        return false;
+    }
+</script>
 </body>
 </html>

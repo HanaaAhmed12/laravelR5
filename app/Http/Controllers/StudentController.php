@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Student;
 
@@ -13,8 +14,11 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::get();
-        return view('students' , compact('students'));
+        // $students = Student::get();
+        // return view('students' , compact('students'));
+
+        $students = DB::table('students')->get();
+        return view('students', compact('students'));
     }
 
     /**
@@ -40,7 +44,11 @@ class StudentController extends Controller
     //   return "Inserted Successfully";
 
 
-    Student::create($req->only($this->column));
+    // Student::create($req->only($this->column));
+    // return redirect('students');
+
+
+    DB::table('students')->insert($req->only($this->column));
     return redirect('students');
     }
 
@@ -49,7 +57,8 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $student = DB::table('students')->where('id', $id)->first();
+        return view('showStudents', compact('student'));
     }
 
     /**
@@ -57,22 +66,26 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $student = DB::table('students')->where('id', $id)->first();
+        return view('editStudents', compact('student'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $req, string $id)
     {
-        //
+        DB::table('students')->where('id', $id)->update($req->only($this->column));
+        return redirect('students');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $req)
     {
-        //
+        $id = $req->id;
+        DB::table('students')->where('id', $id)->delete();
+        return redirect('students');
     }
 }
