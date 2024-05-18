@@ -55,8 +55,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="{{ route('addStudent') }}">Add</a></li>
             <li class=""><a href="{{ route('students') }}">Student</a></li>
-            {{-- <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li> --}}
+            <li class=""><a href="{{route('trashStudent')}}">Trash</a></li>
           </ul>
         </div>
       </nav>

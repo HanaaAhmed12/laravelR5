@@ -17,8 +17,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="{{ route('addClient') }}">Add</a></li>
             <li class=""><a href="{{ route('clients') }}">Client</a></li>
-            {{-- <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li> --}}
+            <li ><a href="{{route('trashClient')}}">Trash</a></li>
           </ul>
         </div>
       </nav>
@@ -28,12 +27,32 @@
     @csrf
     @method('put')
     <label for="ClientName">Client Name</label><br>
+    <p style="color: red">
+        @error('ClientName')
+            {{ $message }}
+        @enderror
+    </p>
     <input type="text" id="clientName" name="ClientName" class="form-control form-control-lg"  value="{{ $client->ClientName }}"><br>
     <label for="phone">Phone</label><br>
+    <p style="color: red">
+        @error('phone')
+            {{ $message }}
+        @enderror
+    </p>
     <input type="text" id="phone" name="phone" class="form-control form-control-lg"  value="{{ $client->phone }}"><br>
     <label for="email">Email</label><br>
+    <p style="color: red">
+        @error('email')
+            {{ $message }}
+        @enderror
+    </p>
     <input type="email" id="email" name="email" class="form-control form-control-lg"  value="{{ $client->email }}"><br>
     <label for="website">Website</label><br>
+    <p style="color: red">
+        @error('website')
+            {{ $message }}
+        @enderror
+    </p>
     <input type="text" id="website" name="website" class="form-control form-control-lg"  value="{{ $client->website }}"><br><br>
     <input type="submit" value="update">
 

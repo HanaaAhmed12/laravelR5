@@ -68,12 +68,32 @@
           @csrf
           @method('put')
           <label for="StudentName">Student Name:</label><br />
+          <p style="color: red">
+            @error('StudentName')
+                {{ $message }}
+            @enderror
+        </p>
           <input type="text" id="StudentName" name="StudentName" value="{{ $student->StudentName }}" /><br />
           <label for="age">Age:</label><br />
+          <p style="color: red">
+            @error('age')
+                {{ $message }}
+            @enderror
+        </p>
           <input type="text" id="age" name="age" value="{{ $student->age }}" /><br /><br />
           <label for="phone">Phone Number:</label><br />
+          <p style="color: red">
+            @error('phone')
+                {{ $message }}
+            @enderror
+        </p>
           <input type="text" id="phone" name="phone" value="{{ $student->phone }}" /><br /><br />
           <label for="email">Email:</label><br />
+          <p style="color: red">
+            @error('email')
+                {{ $message }}
+            @enderror
+        </p>
           <input type="text" id="email" name="email" value="{{ $student->email }}" /><br /><br />
           <input type="submit" value="Submit" />
         </form>

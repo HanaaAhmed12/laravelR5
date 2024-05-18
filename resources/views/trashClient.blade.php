@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Clients</title>
+  <title>Trashed</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,12 +11,7 @@
 <body>
 @include('includes.nav')
 <div class="container">
-         @if (session('success'))
-         <div class="alert alert-success">
-             {{ session('success') }}
-         </div>
-         @endif
-  <h2>Clients Data</h2>
+  <h2>Trash Client</h2>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -24,22 +19,22 @@
         <th>Phone</th>
         <th>Email</th>
         <th>Website</th>
-        <th>Edit</th>
+        <th>Restore</th>
         <th>Show</th>
         <th>Delete</th>
       </tr>
     </thead>
     <tbody>
-        @foreach ($clients as $client)
+        @foreach ($trashed as $client)
       <tr>
         <td>{{ $client->ClientName }}</td>
         <td>{{ $client->phone }}</td>
         <td>{{ $client->email }}</td>
         <td>{{ $client->website }}</td>
-        <td><a href="{{ route('editClients' , $client->id)  }}">Edit</a></td>
+        <td><a href="{{ route('restoreClient' , $client->id)  }}">Restore</a></td>
         <td><a href="{{ route('showClients' , $client->id)  }}">Show</a></td>
         <td>
-            <form action="{{ route('delClients') }}" method="post">
+            <form action="{{ route('forceDeleteClient') }}" method="post">
             @csrf
             @method('Delete')
             <input type="hidden" name="id" value="{{ $client->id }}">
@@ -51,7 +46,6 @@
     </tbody>
   </table>
 </div>
-
 <script>
     function confirmDelete(clientId) {
         if (confirm('Are you sure you want to delete this client?')) {

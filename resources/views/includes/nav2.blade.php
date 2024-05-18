@@ -12,6 +12,8 @@ $currentPage = str_replace('.php', '', $currentPage);
       <ul class="nav navbar-nav">
         <li <?php if($currentPage == 'create') echo 'class="active"'; ?>><a href="{{ route('addStudent') }}">Add</a></li>
         <li <?php if($currentPage == 'index') echo 'class="active"'; ?>><a href="{{ route('students') }}">Student</a></li>
+        <li <?php if($currentPage == 'trash') echo 'class="active"'; ?>><a href="{{route('trashStudent')}}">Trash</a></li>
+
       </ul>
     </div>
   </nav>

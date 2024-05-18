@@ -8,17 +8,16 @@ use App\Models\Student;
 class StudentController extends Controller
 {
 
-    private $column = ['StudentName', 'age', 'phone', 'email'];
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // $students = Student::get();
-        // return view('students' , compact('students'));
-
-        $students = DB::table('students')->get();
-        return view('students', compact('students'));
+        $students = Student::get();
+        return view('students' , compact('students'));
+        // $students = DB::table('students')->get();
+        // return view('students', compact('students'));
     }
 
     /**
@@ -40,16 +39,25 @@ class StudentController extends Controller
     //   $student->phone = $req->phone;
     //   $student->email = $req->email;
     //   $student->save();
-
     //   return "Inserted Successfully";
-
 
     // Student::create($req->only($this->column));
     // return redirect('students');
 
 
-    DB::table('students')->insert($req->only($this->column));
-    return redirect('students');
+    $data= $req->validate([
+        'StudentName' => 'required|max:100|min:5',
+        'age' =>'required|numeric',
+        'phone' =>'required|numeric|min:11',
+        'email' => 'required|email:rfc|ends_with:gmail.com|unique:students,email,except,id',
+    ]);
+             Student::create($data);
+             return redirect('students');
+
+
+    // DB::table('students')->insert($req->only($this->column));
+    // return redirect('students');
+    // dd($req->all());
     }
 
     /**
@@ -57,8 +65,10 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        $student = DB::table('students')->where('id', $id)->first();
+        $student=Student::findOrFail($id);
         return view('showStudents', compact('student'));
+        // $student = DB::table('students')->where('id', $id)->first();
+        // return view('showStudents', compact('student'));
     }
 
     /**
@@ -66,8 +76,10 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        $student = DB::table('students')->where('id', $id)->first();
+        $student=Student::findOrFail($id);
         return view('editStudents', compact('student'));
+        // $student = DB::table('students')->where('id', $id)->first();
+        // return view('editStudents', compact('student'));
     }
 
     /**
@@ -75,8 +87,17 @@ class StudentController extends Controller
      */
     public function update(Request $req, string $id)
     {
-        DB::table('students')->where('id', $id)->update($req->only($this->column));
-        return redirect('students');
+        $data= $req->validate([
+            'StudentName' => 'required|regex:/^[a-zA-Z\s]+$/|max:100|min:5',
+            'age' =>'required|numeric',
+            'phone' =>'required|numeric|digits:11',
+            'email' => 'required|email:rfc|unique:students,email',
+
+        ]);
+        Student::where('id' , $id)->update($data);
+        return redirect('students')->with('success', 'Student updated successfully');
+        // DB::table('students')->where('id', $id)->update($req->only($this->column));
+        // return redirect('students');
     }
 
     /**
@@ -84,8 +105,30 @@ class StudentController extends Controller
      */
     public function destroy(Request $req)
     {
-        $id = $req->id;
-        DB::table('students')->where('id', $id)->delete();
+        $id = $req -> id;
+        Student::where('id' , $id)->delete();
         return redirect('students');
+    }
+
+    public function trash()
+    {
+
+        $trashed=Student::onlyTrashed()->get();
+        return view('trashStudent', compact('trashed'));
+    }
+
+
+    public function restore(string $id)
+    {
+
+        Student::where('id' , $id)->restore();
+        return redirect('students');
+    }
+
+    public function forceDelete(Request $request)
+    {
+        $id = $request -> id;
+        Student::where('id' , $id)->forceDelete();
+        return redirect('trashStudent');
     }
 }
