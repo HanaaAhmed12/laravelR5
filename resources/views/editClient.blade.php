@@ -23,7 +23,7 @@
       </nav>
 <div class="container">
     <h2>Edit client</h2>
-<form action="{{ route('updateClients' , $client->id) }}" method="post" >
+<form action="{{ route('updateClients' , $client->id) }}" method="post"  enctype="multipart/form-data">
     @csrf
     @method('put')
     <label for="ClientName">Client Name</label><br>
@@ -54,9 +54,42 @@
         @enderror
     </p>
     <input type="text" id="website" name="website" class="form-control form-control-lg"  value="{{ $client->website }}"><br><br>
+    <label for="city">City:</label><br>
+    <p style="color: red">
+        @error('city')
+           {{$message}}
+         @enderror
+   </p>
+    <select name="city" id="city" class="form-control">
+      <option value="">Please Select City</option>
+      <option value="Cairo"  @selected($client->city == 'Cairo')>Cairo</option>
+      <option value="Giza"   @selected($client->city == 'Giza')>Giza</option>
+      <option value="Alex"  @selected($client->city == 'Alex')>Alex</option>
+    </select>
+    <br><br>
+    <label for="active">Active:</label><br>
+    <p style="color: red">
+        @error('active')
+           {{$message}}
+         @enderror
+   </p>
+   <input type="checkbox" id="active" name="active" class="form-control" {{ $client->active ? 'checked' : '' }}><br><br>
+   <br>
+    <label for="image">Image:</label><br>
+    <p style="color: red">
+        @error('image')
+           {{$message}}
+         @enderror
+   </p>
+    <input type="file" id="image" name="image" class="form-control"><br><br>
+
+    @if ($client->image)
+    <div>
+        <img src="{{ asset('assets/images/' . $client->image) }}" alt="Client Image" style="max-width: 200px;">
+    </div>
+    @endif
+
     <input type="submit" value="update">
-
-
 </form>
 </div>
 </body>

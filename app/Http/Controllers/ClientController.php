@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Client;
-
+use Illuminate\Validation\Rule;
 class ClientController extends Controller
 {
 
@@ -41,16 +41,29 @@ class ClientController extends Controller
     //   $client->website = "http://egyptair.com";
     //   $client->save();
     //   return "Inserted Successfully";
+
+$messages = $this->errMsg();
 $data= $request->validate([
     'ClientName' => 'required|max:100|min:5',
     'phone' =>'required|min:11',
     'email' =>'required|email:rfc|ends_with:gmail.com|unique:clients,email,except,id',
     'website' => 'required',
-]);
+    'city' => 'required|max:30',
+    'active' => 'required',
+    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+], $messages);
+
+
+$imgExt = $request->image->getClientOriginalExtension();
+$fileName = time() . '.' . $imgExt;
+$path = 'assets/images';
+$request->image->move($path, $fileName);
+
+$data['image'] = $fileName;
+
+$data['active'] = isset($request->active);
          Client::create($data);
          return redirect('clients');
-
-
         // DB::table('clients')->insert($request->only($this->columns));
         // return redirect('clients');
     }
@@ -85,13 +98,34 @@ $data= $request->validate([
     public function update(Request $request, string $id)
     {
 
+        $messages = $this->errMsg();
+        $client = Client::findOrFail($id);
         $data= $request->validate([
             'ClientName' => 'required|max:100|regex:/^[a-zA-Z\s]+$/|min:5',
             'phone' =>'required|min:11|numeric|digits:11',
-            'email' =>'required|email:rfc|ends_with:gmail.com|unique:clients,email,except,id',
+            // 'email' =>'required|email:rfc|ends_with:gmail.com|unique:clients,email,except,id',
+            'email' => [
+                'required',
+                'email:rfc',
+                'ends_with:gmail.com',
+                Rule::unique('clients')->ignore($client->id),
+            ],
             'website' => 'required',
-        ]);
+            'city' => 'required|max:30',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ], $messages);
 
+        if ($request->hasFile('image')) {
+            $imgExt = $request->image->getClientOriginalExtension();
+            $fileName = time() . '.' . $imgExt;
+            $path = 'assets/images';
+            $request->image->move($path, $fileName);
+            $data['image'] = $fileName;
+        } else {
+            $data['image'] = $client->image;
+        }
+
+        $data['active'] = isset($request->active);
         Client::where('id' , $id)->update($data);
         return redirect('clients')->with('success', 'Client updated successfully');
 
@@ -137,5 +171,16 @@ $data= $request->validate([
         $id = $request -> id;
         Client::where('id' , $id)->forceDelete();
         return redirect('trashClient');
+    }
+
+
+    public function errMsg(){
+        return [
+            'ClientName.required' => 'The client name is missed , Please inset',
+            'phone.required' =>'The phone number is missed, Please inset',
+            'email.required' =>'Email is missed, Please inset',
+            'website.required' => 'Website is missed ,Please inset',
+        ];
+
     }
 }

@@ -59,6 +59,21 @@ Route::get('trashClient',[ClientController::class, 'trash'])->name('trashClient'
 Route::get('restoreClient/{id}',[ClientController::class, 'restore'])->name('restoreClient');
 Route::delete('forceDeleteClient',[ClientController::class, 'forceDelete'])->name('forceDeleteClient');
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 4 *******************************************************************************************
 // Route::get('clients', [ClientController::class, 'index'])->name('clients');;
 // Route::get('addClients', [ClientController::class, 'create'])->name('addClient');
