@@ -64,7 +64,7 @@
       <option value="">Please Select City</option>
       <option value="Cairo"  @selected($client->city == 'Cairo')>Cairo</option>
       <option value="Giza"   @selected($client->city == 'Giza')>Giza</option>
-      <option value="Alex"  @selected($client->city == 'Alex')>Alex</option>
+      <option value="Alex"   @selected($client->city == 'Alex')>Alex</option>
     </select>
     <br><br>
     <label for="active">Active:</label><br>

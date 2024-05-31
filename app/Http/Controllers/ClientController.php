@@ -5,8 +5,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use Illuminate\Validation\Rule;
+use App\Traits\UploadFile;
+
+
+
 class ClientController extends Controller
 {
+
+use UploadFile;
 
     // private $columns = ['ClientName', 'phone', 'email', 'website'];
     /**
@@ -54,11 +60,13 @@ $data= $request->validate([
 ], $messages);
 
 
-$imgExt = $request->image->getClientOriginalExtension();
-$fileName = time() . '.' . $imgExt;
-$path = 'assets/images';
-$request->image->move($path, $fileName);
+// $imgExt = $request->image->getClientOriginalExtension();
+// $fileName = time() . '.' . $imgExt;
+// $path = 'assets/images';
+// $request->image->move($path, $fileName);
 
+
+$fileName = $this->upload($request->image, 'assets/images');
 $data['image'] = $fileName;
 
 $data['active'] = isset($request->active);
@@ -115,15 +123,21 @@ $data['active'] = isset($request->active);
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ], $messages);
 
-        if ($request->hasFile('image')) {
-            $imgExt = $request->image->getClientOriginalExtension();
-            $fileName = time() . '.' . $imgExt;
-            $path = 'assets/images';
-            $request->image->move($path, $fileName);
-            $data['image'] = $fileName;
-        } else {
-            $data['image'] = $client->image;
-        }
+        // if ($request->hasFile('image')) {
+        //     $imgExt = $request->image->getClientOriginalExtension();
+        //     $fileName = time() . '.' . $imgExt;
+        //     $path = 'assets/images';
+        //     $request->image->move($path, $fileName);
+        //     $data['image'] = $fileName;
+        // } else {
+        //     $data['image'] = $client->image;
+        // }
+
+
+          if($request->hasFile('image')){
+          $fileName = $this->upload($request->image, 'assets/images');
+          $data['image'] = $fileName;
+            }
 
         $data['active'] = isset($request->active);
         Client::where('id' , $id)->update($data);
