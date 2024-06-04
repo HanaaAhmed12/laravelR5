@@ -15,20 +15,20 @@ class ClientSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // التأكد من وجود إدخالات جديدة
-        for ($i = 0; $i < 100; $i++) {
+
+
             DB::table('clients')->insert([
                 'ClientName' => $faker->name,
                 'phone' => $faker->phoneNumber,
                 'email' => $faker->unique()->safeEmail,
                 'website' => $faker->url,
                 'city' => $faker->city,
-                'image' => 'image.jpg', // يمكنك استخدام $faker->imageUrl() إذا كنت ترغب في صورة عشوائية
+                'image' => 'image.jpg',
                 'active' => $faker->boolean,
                 'address' => $faker->address,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-        }
+
     }
 }

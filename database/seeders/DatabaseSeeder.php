@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
             // \App\Models\Client::factory(10)->create();
 
-            Client::factory(50)->create();
+            Client::factory(30)->create();
             //  $this->call([
             //     ClientSeeder::class,
             // ]);
