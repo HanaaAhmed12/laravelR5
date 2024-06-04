@@ -40,6 +40,7 @@
            {{$message}}
          @enderror
    </p>
+
     <input type="text" id="phone" name="phone" class="form-control form-control-lg"  value="{{ old('phone') }}"><br>
     <label for="email">Email</label><br>
     <p style="color: red">
@@ -47,6 +48,17 @@
             {{$message}}
           @enderror
     </p>
+
+
+
+
+
+
+
+
+
+
+
     <input type="email" id="email" name="email" class="form-control form-control-lg"  value="{{ old('email') }}"><br>
     <label for="website">Wbsite</label><br>
     <p style="color: red">
@@ -68,6 +80,8 @@
       <option value="Alex"  @selected(old('city') == 'Alex')>Alex</option>
     </select>
     <br><br>
+
+
     <label for="active">Active:</label><br>
     <p style="color: red">
         @error('active')
@@ -75,10 +89,9 @@
          @enderror
    </p>
    <input type="checkbox" id="active" name="active" class="form-control" {{ old('active') ? 'checked' : '' }}><br><br>
-
    <br>
-    <label for="image">Image:</label><br>
-    <input type="file" id="image" name="image" class="form-control"><br><br>
+
+
 
     <input type="submit" value="submit"><br>
 </form>

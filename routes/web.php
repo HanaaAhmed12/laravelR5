@@ -85,10 +85,43 @@ Route::delete('forceDeleteClient',[ClientController::class, 'forceDelete'])->nam
 // Route::get('insertClient',[ClientController::class, 'store']);
 // 2 **********************************************************************************
 
+
+
+
+
+
+
+
+
+
 // 1 *****************************************************************************************************************
 Route::get('/', function () {
-    return view('welcome');
+    return view('stacked');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Route::get('Hanaa/{id?}', function ($id = 0) {
 //     return 'Welcome to my website ' . $id;
 // })->where(['id' => '[0-9]+']);
