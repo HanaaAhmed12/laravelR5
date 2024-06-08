@@ -65,11 +65,17 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        $student=Student::findOrFail($id);
-        return view('showStudents', compact('student'));
+        $student = Student::findOrFail($id);
+        $courses = $student->courses;
+        // return view('showStudents', compact('student'));
+        return view('courses', compact('student', 'courses'));
         // $student = DB::table('students')->where('id', $id)->first();
         // return view('showStudents', compact('student'));
+
+
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

@@ -21,7 +21,7 @@ class ClientFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email' => now(),
             'website' => $this->faker->url(),
-            'city' => $this->faker->city(),
+            'city_id' => $this->faker->numberBetween(1, 20),
             'image' => $this->faker->imageUrl(),
             'active' => $this->faker->boolean(),
             'address' => $this->faker->address(),

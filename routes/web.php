@@ -15,18 +15,11 @@ Route::put('updateStudents/{id}',[StudentController::class, 'update'])->name('up
 Route::get('showStudents/{id}',[StudentController::class, 'show'])->name('showStudents');
 Route::delete('delStudents',[StudentController::class, 'destroy'])->name('delStudents');
 
-
 Route::get('trashStudent',[StudentController::class, 'trash'])->name('trashStudent');
 Route::get('restoreStudent/{id}',[StudentController::class, 'restore'])->name('restoreStudent');
 Route::delete('forceDeleteStudent',[StudentController::class, 'forceDelete'])->name('forceDeleteStudent');
 
-
-
-
-
-
-
-
+Route::get('/students/{id}/courses', [StudentController::class, 'showCourses'])->name('courses');
 
 
 

@@ -5,7 +5,7 @@
 @endsection
 
 
-@push('submenu')
+@push('submenu')                      //I can call it many times
 <li><a href="/">Home Page 2</a></li>
 @endpush
 

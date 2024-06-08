@@ -15,5 +15,7 @@
 <h2 style=" font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif "><strong>Email : </strong>{{$client->email}}</h2>
 <hr>
 <h2 style=" font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif "><strong>Website : </strong>{{$client->website}}</h2>
+<hr>
+<h2 style=" font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif "><strong>City : </strong>{{$client->city->city}}</h2>
 </body>
 </html>

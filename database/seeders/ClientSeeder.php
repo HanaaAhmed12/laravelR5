@@ -15,14 +15,12 @@ class ClientSeeder extends Seeder
     {
         $faker = Faker::create();
 
-
-
             DB::table('clients')->insert([
                 'ClientName' => $faker->name,
                 'phone' => $faker->phoneNumber,
                 'email' => $faker->unique()->safeEmail,
                 'website' => $faker->url,
-                'city' => $faker->city,
+                'city_id' => $faker->numberBetween(1, 20),
                 'image' => 'image.jpg',
                 'active' => $faker->boolean,
                 'address' => $faker->address,
