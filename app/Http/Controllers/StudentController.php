@@ -67,8 +67,11 @@ class StudentController extends Controller
     {
         $student = Student::findOrFail($id);
         $courses = $student->courses;
-        // return view('showStudents', compact('student'));
+
         return view('courses', compact('student', 'courses'));
+
+
+         // return view('showStudents', compact('student'));
         // $student = DB::table('students')->where('id', $id)->first();
         // return view('showStudents', compact('student'));
 

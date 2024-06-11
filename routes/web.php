@@ -5,6 +5,7 @@ use App\Http\Controllers\MyController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\EmailController;
 use App\Models\Student;
 
 Route::get('students', [StudentController::class, 'index'])->name('students');
@@ -14,32 +15,14 @@ Route::get('editStudents/{id}',[StudentController::class, 'edit'])->name('editSt
 Route::put('updateStudents/{id}',[StudentController::class, 'update'])->name('updateStudents');
 Route::get('showStudents/{id}',[StudentController::class, 'show'])->name('showStudents');
 Route::delete('delStudents',[StudentController::class, 'destroy'])->name('delStudents');
-
 Route::get('trashStudent',[StudentController::class, 'trash'])->name('trashStudent');
 Route::get('restoreStudent/{id}',[StudentController::class, 'restore'])->name('restoreStudent');
 Route::delete('forceDeleteStudent',[StudentController::class, 'forceDelete'])->name('forceDeleteStudent');
-
 Route::get('/students/{id}/courses', [StudentController::class, 'showCourses'])->name('courses');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 5 *******************************************************************************************
-Route::get('clients', [ClientController::class, 'index'])->name('clients');
+Route::get('clients', [ClientController::class, 'index'])->middleware('verified')->name('clients');
 Route::get('addClients', [ClientController::class, 'create'])->name('addClient');
 Route::post('insertClient',[ClientController::class, 'store'])->name('insertClient');
 Route::get('editClients/{id}',[ClientController::class, 'edit'])->name('editClients');
@@ -51,20 +34,6 @@ Route::delete('delClients',[ClientController::class, 'destroy'])->name('delClien
 Route::get('trashClient',[ClientController::class, 'trash'])->name('trashClient');
 Route::get('restoreClient/{id}',[ClientController::class, 'restore'])->name('restoreClient');
 Route::delete('forceDeleteClient',[ClientController::class, 'forceDelete'])->name('forceDeleteClient');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // 4 *******************************************************************************************
@@ -79,41 +48,10 @@ Route::delete('forceDeleteClient',[ClientController::class, 'forceDelete'])->nam
 // 2 **********************************************************************************
 
 
-
-
-
-
-
-
-
-
 // 1 *****************************************************************************************************************
 Route::get('/', function () {
-    return view('stacked');
+    return view('welcome');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Route::get('Hanaa/{id?}', function ($id = 0) {
 //     return 'Welcome to my website ' . $id;
@@ -163,4 +101,10 @@ Route::post('reform', function(){
 })->name('reform1');
 Route::post('submit1', [FormController::class, 'form'])->name('submitForm');
 Route::get('test30',[MyController::class, 'my_data']);
-// 1 ****************************************************************************************************************
+
+
+Auth::routes(['verify'=> true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/send-email', [EmailController::class, 'sendEmail']);
