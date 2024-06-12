@@ -8,7 +8,7 @@ class EmailController extends Controller
 {
     public function sendEmail()
     {
-        Mail::raw('This is a test email', function ($message) {
+        Mail::raw('This Is My first Email', function ($message) {
             $message->to('test@example.com')
                     ->subject('Test Email');
         });
