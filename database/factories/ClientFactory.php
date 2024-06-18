@@ -19,7 +19,7 @@ class ClientFactory extends Factory
             'ClientName' => $this->faker->name(),
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->unique()->safeEmail(),
-            'email' => now(),
+            // 'userName' => $this->faker->unique()->name(),
             'website' => $this->faker->url(),
             'city_id' => $this->faker->numberBetween(1, 20),
             'image' => $this->faker->imageUrl(),

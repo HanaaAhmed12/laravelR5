@@ -25,6 +25,42 @@
                             </div>
                         </div>
 
+
+                        <div class="row mb-3">
+                            <label for="userName" class="col-md-4 col-form-label text-md-end">{{ __('userName') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="userName" type="text" class="form-control @error('userName') is-invalid @enderror" name="userName" value="{{ old('userName') }}" required autocomplete="userName" autofocus>
+
+                                @error('userName')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 

@@ -21,7 +21,7 @@
                                 <form method="POST" action="{{ route('login') }}" class="user">
                                     @csrf
 
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="email" class="col-form-label text-md-end">{{ __('Email Address') }}</label>
                                         <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter Email Address...">
                                         @error('email')
@@ -29,7 +29,31 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                    </div> --}}
+
+                                    <div class="form-group">
+                                        <label for="userName" class="col-form-label text-md-end">{{ __('userName') }}</label>
+                                        <input id="userName" type="userName" class="form-control form-control-user @error('userName') is-invalid @enderror" name="userName" value="{{ old('userName') }}" required autocomplete="userName" autofocus placeholder="Enter User Name...">
+                                        @error('userName')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                     <div class="form-group">
                                         <label for="password" class="col-form-label text-md-end">{{ __('Password') }}</label>

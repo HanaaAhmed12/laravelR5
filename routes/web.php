@@ -6,7 +6,9 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\ContactController;
 use App\Models\Student;
+use Illuminate\Routing\Route as RoutingRoute;
 
 Route::get('students', [StudentController::class, 'index'])->name('students');
 Route::get('addStudents', [StudentController::class, 'create'])->name('addStudent');
@@ -101,8 +103,14 @@ Route::post('reform', function(){
 })->name('reform1');
 Route::post('submit1', [FormController::class, 'form'])->name('submitForm');
 Route::get('test30',[MyController::class, 'my_data']);
+Route::get('mySession', [MyController::class, 'myVal']);
+Route::get('restoreSession', [MyController::class, 'restoreVal']);
+Route::get('DeleteSession', [MyController::class, 'DeleteVal']);
+Route::get('sendEmail', [MyController::class, 'sendClientEmail']);
 
-
+// Route::get('contact', [ContactController::class, 'contact'])->name('contact');
+Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactController::class, 'contact'])->name('contact.submit');
 Auth::routes(['verify'=> true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
