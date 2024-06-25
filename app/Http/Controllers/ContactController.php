@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Mail\ContactMail;
-
 
 class ContactController extends Controller
 {
@@ -12,30 +13,17 @@ class ContactController extends Controller
         return view('contact');
     }
 
-    public function contact(Request $request)
+    public function submit(Request $request)
     {
-        $request->validate([
-          'name' => 'required',
-          'email' => 'required|email',
-          'subject' => 'required',
-          'message' => 'required',
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
         ]);
 
-        $data = [
-          'name' => $request->name,
-          'email' => $request->email,
-          'subject' => $request->subject,
-          'message' => $request->message,
+        Mail::to('recipient-email@example.com')->send(new ContactMail($data));
 
-        ];
-
-        try {
-            Mail::to('Myemail@gmail.com')->send(new ContactMail($data));
-            return redirect()->back()->with('message', 'Email successfully sent!');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to send email. Please try again later.');
-        }
-
-
+        return redirect()->back()->with('message', 'Email successfully sent!');
     }
 }

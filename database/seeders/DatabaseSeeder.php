@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Student;
 use App\Models\City;
 use App\Models\Course;
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 // use Illuminate\Database\ClientSeeder;
@@ -17,7 +18,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-            // \App\Models\Client::factory(10)->create();
+
+        User::factory(50)->create();
+            // \App\Models\User::factory(10)->create();
             City::factory(50)->create();
             Client::factory(50)->create();
             // Student::factory(50)->create();
@@ -31,9 +34,9 @@ class DatabaseSeeder extends Seeder
             // ]);
 
 
-            $this->call([
-                CourseSeeder::class,
-            ]);
+            // $this->call([
+            //     CourseSeeder::class,
+            // ]);
 
             // User::factory()->create([
             //     'name' => 'Test User',

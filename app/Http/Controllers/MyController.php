@@ -14,20 +14,19 @@ class MyController extends Controller
     }
 
     public function myVal(){
-
-        // session()->put('test', 'My first Session');
-        session()->flash('test1', 'My first Session');  //used one only then disappear.
+        session()->put('test', 'My first Session');
+        // session()->flash('test1', 'My first Session');  //used one only then disappear.
         return 'Session Created';
     }
     public function restoreVal(){
         return 'My Session Value is ' . session('test1');
     }
     public function DeleteVal(){
-        // session()->forget('test'); delete one only
+        // session()->forget('test'); //delete one only
         // session()->flush();
         return 'My Session removed';
     }
-
+// ***************************************************
     public function sendClientEmail(){
         $data = Client::findOrFail(1)->toArray();
         $data['theMessage']= 'My First Message';

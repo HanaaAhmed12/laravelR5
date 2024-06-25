@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="{{LaravelLocalization::getCurrentLocale()}}" dir="{{
+LaravelLocalization::getCurrentLocaleDirection() }}">
 <head>
   <title>Clients</title>
   <meta charset="utf-8">

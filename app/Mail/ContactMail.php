@@ -12,7 +12,7 @@ use Illuminate\Mail\Mailables\Address;
 
 class ContactMail extends Mailable
 {
-
+public $data;
     use Queueable, SerializesModels;
 
 
@@ -20,9 +20,9 @@ class ContactMail extends Mailable
      * Create a new message instance.
      */
 
-    public function __construct(public array $data)
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
     /**
      * Get the message envelope.
@@ -31,7 +31,7 @@ class ContactMail extends Mailable
     {
         return new Envelope(
             from: new Address('Hanaa@gmail.com', 'BackEnd Developer'),
-            subject: 'Contact Mail',
+            subject: 'Embracing Opportunities and Growth in the Workplace',
         );
     }
 

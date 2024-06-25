@@ -13,6 +13,9 @@ $currentPage = str_replace('.php', '', $currentPage);
         <li <?php if($currentPage == 'create') echo 'class="active"'; ?>><a href="{{ route('addClient') }}">Add</a></li>
         <li <?php if($currentPage == 'index') echo 'class="active"'; ?>><a href="{{ route('clients') }}">Client</a></li>
         <li <?php if($currentPage == 'trash') echo 'class="active"'; ?>><a href="{{route('trashClient')}}">Trash</a></li>
+
+        <li><a href="{{ LaravelLocalization::getLocalizedURL('en') }}" >English</a></li>
+        <li><a href="{{ LaravelLocalization::getLocalizedURL('ar') }}" >Arabic</a></li>
         @yield('menu')
         @stack('submenu')
       </ul>

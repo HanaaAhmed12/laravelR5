@@ -30,7 +30,7 @@
 				<img src="{{asset('assetsForm/images/img-01.png')}}" alt="IMG">
 			</div>
 
-			<form class="contact1-form validate-form" method="post" action="{{route('contact.create')}}">
+			<form class="contact1-form validate-form" method="post" action="{{route('contact.submit')}}">
                 @csrf
 				<span class="contact1-form-title">
 					Get in touch

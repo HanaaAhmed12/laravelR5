@@ -18,6 +18,7 @@
             <li class="active"><a href="{{ route('addClient') }}">Add</a></li>
             <li class=""><a href="{{ route('clients') }}">Client</a></li>
             <li ><a href="{{route('trashClient')}}">Trash</a></li>
+
           </ul>
         </div>
       </nav>

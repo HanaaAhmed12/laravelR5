@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="{{LaravelLocalization::getCurrentLocale()}}" dir="{{
+LaravelLocalization::getCurrentLocaleDirection() }}">
 <head>
   <title>Clients</title>
   <meta charset="utf-8">
@@ -16,12 +17,12 @@
              {{ session('success') }}
          </div>
          @endif
-  <h2>Clients Data</h2>
+  <h2>{{__('messages.Clients_data')}}</h2>
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>ClientName</th>
-        <th>Phone</th>
+        <th>{{__('messages.Client_Name')}}</th>
+        <th>{{__('messages.phone')}}</th>
         <th>Email</th>
         <th>Website</th>
         <th>Active</th>

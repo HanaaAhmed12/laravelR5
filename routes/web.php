@@ -8,7 +8,15 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ContactController;
 use App\Models\Student;
-use Illuminate\Routing\Route as RoutingRoute;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
 
 Route::get('students', [StudentController::class, 'index'])->name('students');
 Route::get('addStudents', [StudentController::class, 'create'])->name('addStudent');
@@ -37,6 +45,12 @@ Route::get('trashClient',[ClientController::class, 'trash'])->name('trashClient'
 Route::get('restoreClient/{id}',[ClientController::class, 'restore'])->name('restoreClient');
 Route::delete('forceDeleteClient',[ClientController::class, 'forceDelete'])->name('forceDeleteClient');
 
+
+Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
+    Route::get('clients', [ClientController::class, 'index']);
+    Route::get('eng', [ClientController::class, 'eng'])->name('eng');
+    Route::get('arab', [ClientController::class, 'arab'])->name('arab');
+});
 
 // 4 *******************************************************************************************
 // Route::get('clients', [ClientController::class, 'index'])->name('clients');;
@@ -89,7 +103,6 @@ Route::prefix("colors")->group(function (){
 // Route::fallback(function(){
 //     return redirect('/');
 // });
-
 // Route::get('test10', function(){
 //     return view('test');
 // });
@@ -103,16 +116,25 @@ Route::post('reform', function(){
 })->name('reform1');
 Route::post('submit1', [FormController::class, 'form'])->name('submitForm');
 Route::get('test30',[MyController::class, 'my_data']);
+// ***********************************************************************
 Route::get('mySession', [MyController::class, 'myVal']);
 Route::get('restoreSession', [MyController::class, 'restoreVal']);
 Route::get('DeleteSession', [MyController::class, 'DeleteVal']);
 Route::get('sendEmail', [MyController::class, 'sendClientEmail']);
-
 // Route::get('contact', [ContactController::class, 'contact'])->name('contact');
+
+
+
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact', [ContactController::class, 'contact'])->name('contact.submit');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
+
+
+
+
+
+
 Auth::routes(['verify'=> true]);
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/send-email', [EmailController::class, 'sendEmail']);
+    });

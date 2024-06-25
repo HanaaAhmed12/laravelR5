@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use Illuminate\Validation\Rule;
 use App\Traits\UploadFile;
-
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 class ClientController extends Controller
@@ -25,7 +25,21 @@ use UploadFile;
 
     // $clients = DB::table('clients')->get();
     // return view('clients', compact('clients'));
+
     }
+
+    public function eng()
+    {
+        $url = LaravelLocalization::getLocalizedURL('en', 'a/b/c');
+        return view('eng', ['localizedURL' => $url]);
+    }
+
+    public function arab()
+    {
+        $url = LaravelLocalization::getLocalizedURL('ar', 'a/b/c');
+        return view('arab', ['localizedURL' => $url]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -60,9 +74,9 @@ $data= $request->validate([
 ], $messages);
 
 
-// $imgExt = $request->image->getClientOriginalExtension();
-// $fileName = time() . '.' . $imgExt;
-// $path = 'assets/images';
+//  $imgExt = $request->image->getClientOriginalExtension();
+//  $fileName = time() . '.' . $imgExt;
+//  $path = 'assets/images';
 // $request->image->move($path, $fileName);
 
 
