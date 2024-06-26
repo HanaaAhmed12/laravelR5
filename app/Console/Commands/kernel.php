@@ -1,7 +1,7 @@
-<!--
+<?php
 
 namespace App\Console;
-
+use App\Console\Commands\DatabaseBackup;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,9 +14,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('db:backup')->daily();
     }
-    protected $commands = [
-        \App\Console\Commands\DatabaseBackup::class,
-    ];
+    // protected $commands = [
+    //     DatabaseBackup::class,
+    // ];
     /**
      * Register the commands for the application.
      */
@@ -26,4 +26,4 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
-} -->
+}
