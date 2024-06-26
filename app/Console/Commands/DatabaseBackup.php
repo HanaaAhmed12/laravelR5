@@ -1,4 +1,4 @@
-<?php
+<!--
 
 namespace App\Console\Commands;
 
@@ -37,4 +37,4 @@ class DatabaseBackup extends Command
         // Output success message
         $this->info('Database backup completed successfully: ' . $backupFileName);
     }
-}
+} -->
